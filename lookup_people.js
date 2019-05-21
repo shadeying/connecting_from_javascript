@@ -10,12 +10,7 @@ const client = new pg.Client({
   ssl      : settings.ssl
 });
 
-const firstName = process.argv.slice(2)[0];
-
-client.connect((err) => {
-  if (err) {
-    return console.error("Connection Error", err);
-  }
+function findPeople(firstName){
   console.log("Searching ...")
   client.query("SELECT * FROM famous_people WHERE first_name=$1", [firstName], (err, result) => {
     if (err) {
@@ -27,7 +22,16 @@ client.connect((err) => {
       const person = result.rows[i];
       console.log(`- ${person.first_name} ${person.last_name}, born '${person.birthdate}'`);
     }
-
     client.end();
   });
-});
+}
+
+client.connect((err) => {
+  if (err) {
+    return console.error("Connection Error", err);
+  }
+
+  const firstName = process.argv.slice(2)[0];
+  findPeople(firstName);
+
+  });
