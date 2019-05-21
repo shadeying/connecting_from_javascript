@@ -13,7 +13,7 @@ function findPeople(firstName){
 
     for(let i = 0; i < result.length; i++){
       const person = result[i];
-      console.log(`- ${person.first_name} ${person.last_name}, born '${person.birthdate}'`);
+      console.log(`- ${person.first_name} ${person.last_name}, born '${person.birthdate.toLocaleDateString()}'`);
     }
     knex.destroy();
   });

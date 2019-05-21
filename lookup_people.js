@@ -20,7 +20,7 @@ function findPeople(firstName){
 
     for(let i = 0; i < result.rows.length; i++){
       const person = result.rows[i];
-      console.log(`- ${person.first_name} ${person.last_name}, born '${person.birthdate}'`);
+      console.log(`- ${person.first_name} ${person.last_name}, born '${person.birthdate.toLocaleDateString()}'`);
     }
     client.end();
   });
